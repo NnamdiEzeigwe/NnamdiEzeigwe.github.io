@@ -3,43 +3,42 @@
   <head>
     <title>Charts Lab</title>
     <link rel="stylesheet" type="text/css" href="./styles.css" />
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   </head>
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="header">Frontend Libraries: Charts Lab</div>
+        <div class="header">Nnamdi Ezeigwe Lab_8 Charts Lab</div>
         <div class="content">
-          When your lab is done, this should be replaced with a useful chart full of food data.
+          <div id="chartContainer" styles="height: 500px; width:200%;"></div>
         </div>
+
         <div class="footer">Let's eat out in the future!</div>
       </div>
     </div>
     <script>
-      fetch(' https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(data);
-        const clearEmptyData = data.filter((f) => f.geocoded_column_1);
-        const refined = clearEmptyData.map((m) => ({
-          category: m.category,
-          name: m.name,
-          latlong: m.geocoded_column_1.coordinates,
-        }));
-        return refined;
-      })
-      .then((data) => {
+      fetch(" https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json")
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          const clearEmptyData = data.filter((f) => f.geocoded_column_1);
+          const refined = clearEmptyData.map((m) => ({
+            category: m.category,
+            name: m.name,
+            latlong: m.geocoded_column_1.coordinates,
+          }));
+          return refined;
+        })
+        .then((data) => {
           return data.reduce((a, current) => {
             if (!a[current.category]) {
               a[current.category] = [];
             }
-            r[current.category].push(current);
-            return a;
+            a[current.category].push(current);
+            return a
           }, {});
         })
 
         .then((data) => {
-          // this is an explicit return. If I want my information to go further, I'll need to use the "return" keyword before the brackets close
           console.log("new data", data);
           const reformattedData = Object.entries(data).map((current, i) => {
             console.log(current);
@@ -51,22 +50,27 @@
           return reformattedData;
         })
 
-        .then((a) => {
-          console.log(a);
-          var chart = new CanvasJS.Chart("chartContainer", {
-	          animationEnabled: true,
-	          theme: "light2", // "light1", "light2", "dark1", "dark2"
-	          title:{
-		          text: "Places to eat in PG County"
-	          },
-	          axisY: {
-		          title: "Reserves(MMbbl)"
-	          },
+        .then((r) => {
+          console.log(r);
+          chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title: {
+              text: "Places To Eat In PG County",
+            },
+            axisX: {
+              labelFontSize: 8,
+              margin: 10,
+              interval: 1,
+            },
+            axisY2: {
+              interlacedColor: "rgba(1,77,101,.2)",
+              gridColor: "rgba(1,77,101,.1)",
+            },
             data: [
               {
                 type: "bar",
-                color: "#",
-                dataPoints: a,
+                color: "#014D65",
+                dataPoints: r,
               },
             ],
           });
