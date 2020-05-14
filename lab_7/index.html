@@ -14,6 +14,14 @@
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
       crossorigin=""
     ></script>
+    <style>
+      #map1 {
+        display: flex;
+        align-self: start;
+        width: 640px;
+        height: 480px;
+      }
+    </style>
   </head>
 
   <body>
@@ -29,7 +37,7 @@
     <script>
         
       /* Your lab code can go here, or in an external file you include */
-      const mymap = L.map("map1").setView([51.505, -0.09], 13);
+      const mymap = L.map("map1").setView([42.0, -52.79], 13);
       L.tileLayer(
         "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}",
         {
@@ -43,8 +51,13 @@
         }
       ).addTo(mymap);
       const mark1 = L.marker([38.9936, -76.9452]).addTo(mymap);
-      const str1 = "<b>Hello world!</b><br>I am a popup.";
+      const str1 = "<b>This is Eppley Rec Centre.</b><br>";
       mark1.bindPopup(str1).openPopup();
+
+      somePoints = fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json')
+          .then((response) => {
+            return response.json();
+          })
     </script>
   </body>
 </html>
