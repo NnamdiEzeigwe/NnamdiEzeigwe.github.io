@@ -2,23 +2,44 @@
 <html lang="en">
 
 <head>
-  <title>Replace Me With Your Lab Page</title>
+  <title>Lab 9 - Simple Servers</title>
   <link rel="stylesheet" type="text/css" href="./styles.css">
 </head>
 
 <body>
   <div class="container">
     <div class="wrapper">
-      <div class="header">Replace Me With Your Lab Page</div>
+      <div class="header">Nnamdi Ezeigwe Lab 9</div>
       <div class="content"></div>
+      <div id="chartContainer" style="height: 370px; width: 100%;"></div>
       <div class="footer"></div>
     </div>
   </div>
+  <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
   <script>
+
     fetch('/api') // Rather than fetching from PG County, we're going to fetch from our own server.
       .then(res => res.json())
       .then(res => {
         // Here's where your chart code should go.
+        console.log(res);
+        var chart = new CanvasJS.Chart= ('chartContainer', {
+          animationEnabled: true,
+          title: {
+            text: 'Different Eateries in PG County',
+            horizontalAlign: 'center'
+          },
+          data: [{
+            type: 'doughnut',
+            startAngle: 60,
+            // innerRadius: 60,
+            indexLabelFontSize: 17,
+            indexLabel: '{label} - #percent%',
+            toolTipContent: '<b>{label}:</b> {y} (#percent%)',
+            dataPoints: res
+          }]
+        });
+        chart.render();
       })
   </script>
 </body>

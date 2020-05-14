@@ -22,13 +22,15 @@ app.use(express.static('public'));
 
 
 function processDataForFrontEnd(req, res) {
-  const baseURL = ''; // Enter the URL for the data you would like to retrieve here
-
+  const baseURL = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json'; // Enter the URL for the data you would like to retrieve here
+  let count_array = [];
+  let result = {};
   // Your Fetch API call starts here
   // Note that at no point do you "return" anything from this function -
   // it instead handles returning data to your front end at line 34.
     fetch(baseURL)
       .then((r) => r.json())
+      
       .then((data) => {
         console.log(data);
         res.send({ data: data }); // here's where we return data to the front end
