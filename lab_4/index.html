@@ -8,8 +8,8 @@
   <body>
     <div class="container">
       <div class="wrapper">
-        <div class="top">Prof A's Demo Page</div>
-        <button class="activate" onclick="clickMe()">
+        <div class="header">Prof A's Demo Page</div>
+        <button class="button" onclick="clickMe()">
           Click me to make a change
         </button>
         <div class="content">
@@ -27,7 +27,25 @@
     <script>
       function clickMe() {
         const content = document.querySelector(".content");
-        content.innerHTML = "Hello world";     
+        content.innerHTML = "Hello World,";
+
+        let name = "Nnamdi"
+        let lastname = "Ezeigwe"
+
+        let fullname = "Nnamdi Ezeigwe"
+        let res = fullname.split(" ")
+
+        let nombre = res[0].length+ res[1].length
+      
+
+        
+        const header = document.querySelector(".header");
+        header.innerHTML = fullname+ " has " +(nombre) +" characters in it " + " ,Lab 4"
+
+        let para = document.querySelector(".content")
+        para.innerHTML = "<p>Hello World,</p> <p>My first name has "+ name.length +" "+"characters.</p> <p>The third character in my name is "+name[2].toUpperCase()+".<br></p> <p>The last three characters of my last name is " +lastname.slice(-3)+". </p>"
+      
+        
       }
     </script>
   </body>
